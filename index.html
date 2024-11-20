@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Пошуковик закладів культури та відпочинку</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"> <!-- Підключення зовнішнього CSS -->
 </head>
+
 <body>
   <header class="header">
     <div class="logo">
@@ -20,8 +22,8 @@
     <!-- Секція пошуку -->
     <section class="search-section">
       <h2>Знайдіть заклад у вашому місті</h2>
-      <form class="search-form" id="search-form">
-        <input type="text" placeholder="Введіть назву закладу чи категорію..." class="search-input" id="query">
+      <form class="search-form">
+        <input type="text" placeholder="Введіть назву закладу чи категорію..." class="search-input">
         <button type="submit" class="search-button">Пошук</button>
       </form>
     </section>
@@ -33,8 +35,9 @@
     </section>
   </main>
 
+  <!-- Включення Google Maps JavaScript API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE-BC709drBWPsGYwNNFBVuxa-J2F1qMU&callback=initMap&libraries=places" async defer></script>
   <script>
-    // Функція ініціалізації карти
     function initMap() {
       const center = { lat: 48.2920, lng: 25.9353 }; // Чернівці, Україна
 
@@ -49,23 +52,7 @@
         title: "Чернівці",
       });
     }
-
-    // Обробка форми пошуку
-    document.getElementById('search-form').addEventListener('submit', async function (e) {
-      e.preventDefault(); // Запобігаємо перезавантаженню сторінки
-
-      const query = document.getElementById('query').value; // Отримуємо значення введеного пошуку
-
-      // Надсилаємо запит на сервер
-      const response = await fetch(`/api/places?query=${query}`);
-      const data = await response.json();
-
-      // Виводимо результат у консоль (можна додати відображення результатів на сторінці)
-      console.log(data);
-    });
   </script>
-
-  <!-- Включення Google Maps JavaScript API -->
-  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=places" async defer></script>
 </body>
+
 </html>
