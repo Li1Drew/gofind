@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Пошуковик закладів культури та відпочинку</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Підключення зовнішнього CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
   <header class="header">
     <div class="logo">
       <h1>Культура і Відпочинок</h1>
     </div>
-    <nav class="nav">
-      <a href="#" class="nav-link">Головна</a>
-    </nav>
   </header>
 
   <main>
-    <!-- Секція пошуку -->
-    <section class="search-section">
-      <h2>Знайдіть заклад у вашому місті</h2>
-      <form class="search-form">
-        <input type="text" placeholder="Введіть назву закладу чи категорію..." class="search-input">
-        <button type="submit" class="search-button">Пошук</button>
-      </form>
+    <section class="controls">
+      <div class="search-section">
+        <h2>Знайдіть заклад у вашому місті</h2>
+        <div class="search-form">
+          <select id="place-type" class="search-input">
+            <option value="museum">Музей</option>
+            <option value="library">Бібліотека</option>
+            <option value="park">Парк</option>
+            <option value="church">Церква</option>
+          </select>
+          <button id="search-button" class="search-button">Знайти</button>
+        </div>
+
+        <div id="filters-container" class="filters-container"></div>
+
+        <div id="transport-mode-selector" class="transport-selector">
+          <label>
+            <input type="radio" name="transport" value="DRIVING" checked />
+            Авто
+          </label>
+          <label>
+            <input type="radio" name="transport" value="WALKING" />
+            Пішки
+          </label>
+        </div>
+
+        <button id="route-button" class="route-button" disabled>
+          Прокласти маршрут
+        </button>
+      </div>
+
+      <section id="route-info" class="route-info hidden">
+        <h3>Час у дорозі</h3>
+        <div id="travel-times"></div>
+      </section>
     </section>
 
-    <!-- Секція карти -->
     <section class="map-section">
-      <h3>Мапа закладів</h3>
       <div id="map" class="map-placeholder">Карта завантажується...</div>
     </section>
   </main>
 
-  <!-- Включення Google Maps JavaScript API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE-BC709drBWPsGYwNNFBVuxa-J2F1qMU&callback=initMap&libraries=places" async defer></script>
-  <script>
-    function initMap() {
-      const center = { lat: 48.2920, lng: 25.9353 }; // Чернівці, Україна
-
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: center,
-        zoom: 13,
-      });
-
-      const marker = new google.maps.Marker({
-        position: center,
-        map: map,
-        title: "Чернівці",
-      });
-    }
-  </script>
+  <script src="script.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd-H7Dl_B02GL8jJplerLxy638BOtochg&callback=initMap&libraries=places"
+    async
+    defer
+  ></script>
 </body>
-
 </html>
